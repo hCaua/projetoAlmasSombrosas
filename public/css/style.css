@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+}
+
+
+.desativado{
+    display: none;
+}
+
+.ativo{
+    display: block;
+}
+
+.div1{
+    background: linear-gradient(to bottom, #252525, #5e5d5d );
+    min-width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.div2{
+    height: 100vh;
+    min-width: 100vw;
+    background: linear-gradient(to bottom, #5e5d5d, #252525 );
+    position: relative;
+}
+
+#dirDireita{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+}
+
+#dirEsquerda{
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+}
