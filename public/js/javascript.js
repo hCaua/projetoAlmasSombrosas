@@ -1,42 +1,49 @@
-var indiceTelaAtual = 1
-var indiceProximaTela = ""
-var indiceTelaAnterior = ""
-
 var telas = []
-for (i = 1; i <= 3; i++){
-    var tela = document.querySelector(`[id="tela${i}"]`) 
-    
-    telas.push(tela)
-}
 
+
+ document.addEventListener('DOMContentLoaded', function() {
+    for (i = 1; i <= 3; i++){
+        var tela = document.querySelector(`[id="tela${i}"]`) 
+        
+        telas.push(tela)
+    }
+ }, false);
+
+
+ var distanciaCarrosel = 0
 
 function dirDireita(){
-    for (i = 1; i < telas.length; i++){
-        var tela = document.querySelector(`[id="tela${i}"]`) 
+    distanciaCarrosel += 100
 
-        tela.add
-    }    
+    const transicao = document.querySelector(".t-direita")
+    transicao.style.animation = "transicaoEsquerda 2s linear"
+   
+
+    for (i = 0; i < telas.length; i++){
+        
+        telas[i].setAttribute("style", `transform: translateX(-${distanciaCarrosel}vw)`)
+    } 
+
+    setTimeout(() => { transicao.style.animation = null }, 1800);
+    
 }
 
-// function dirDireita(){
+function dirEsquerda(){
+    distanciaCarrosel -= 100
 
-//         var telaAtual = document.querySelector(`[data-indice="${indiceTelaAtual}"]`) 
-//         indiceProximaTela = indiceTelaAtual + 1
-//         var proximaTela = document.querySelector(`[data-indice="${indiceProximaTela}"]`)
-//         if(indiceTelaAtual == 1 && indiceTelaAtual == 0){
-//             indiceTelaAnterior = 0
-//         }else{
-//             indiceTelaAnterior = indiceTelaAtual - 1
-//             var telaAnterior = document.querySelector(`[data-indice="${indiceTelaAnterior}"]`)
-//         }
-//         indiceTelaAtual = indiceProximaTela
+    const transicao = document.querySelector(".t-esquerda")
+    transicao.style.animation = "transicaoDireita 2s linear"
 
+    for (i = 0; i < telas.length; i++){
+        
+        
+        telas[i].setAttribute("style", `transform: translateX(-${distanciaCarrosel}vw)`)
+    } 
 
-// console.log(telaAnterior)
-// console.log(telaAtual)
-// console.log(proximaTela)
+    setTimeout(() => { transicao.style.animation = null }, 1800);
+     
+}
 
-// }
 
 
 

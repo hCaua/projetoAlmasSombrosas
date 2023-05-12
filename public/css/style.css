@@ -6,13 +6,23 @@ body{
     overflow: hidden;
 }
 
-
-.desativado{
-    display: none;
+.transicao{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
 }
 
-.ativo{
-    display: block;
+.t-direita{
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.753), transparent);
+    right: -100vw;
+    
+    
+}
+
+.t-esquerda{
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.753), transparent);
+    left: -100vw;
 }
 
 .div1{
@@ -20,13 +30,28 @@ body{
     min-width: 100vw;
     height: 100vh;
     position: relative;
+    transition: transform 1s linear;
+    transform: translateX(0);
 }
 
 .div2{
     height: 100vh;
     min-width: 100vw;
-    background: linear-gradient(to bottom, #5e5d5d, #252525 );
+    background-image: url("https://i.imgflip.com/735z6j.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
+    transition: transform 1s linear;
+    transform: translateX(0);
+}
+
+.div3{
+    height: 100vh;
+    min-width: 100vw;
+    background: linear-gradient(to left, #5e5d5d, #252525 );
+    position: relative;
+    transition: transform 1s linear;
+    transform: translateX(0);
 }
 
 #dirDireita{
@@ -40,3 +65,21 @@ body{
     left: 1rem;
     top: 50%;
 }
+
+
+
+@keyframes transicaoDireita {
+    0%{transform: translateX(50vw);}
+
+    100%{transform: translateX(250vw);}
+    
+  }
+
+  @keyframes transicaoEsquerda {
+
+        0%{transform: translateX(-50vw);}
+
+        100%{transform: translateX(-250vw);}
+        
+
+  }
