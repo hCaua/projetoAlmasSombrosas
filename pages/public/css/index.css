@@ -1,0 +1,232 @@
+/* configurações padrões */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');   
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+
+    font-size: 1.20rem;
+    line-height: 1.2rem;
+    font-family: 'Cinzel', serif;
+    
+}
+
+img, svg, video{
+    max-width: 100%;
+    display: block;
+}
+
+/* css da tela */
+.transicao{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.t-direita{
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.753), transparent);
+    right: -100vw;
+}
+
+.t-esquerda{
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.753), transparent);
+    left: -100vw;
+}
+
+.t-full{
+    background: black;
+    width: 100%;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 1.2s linear;
+}
+
+.telaStart{
+    background: black;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+.telaStartInner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.telaStart span{
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 500;
+    animation: textoBrilhando 3s ease-in-out infinite;
+    cursor: default;
+}
+
+
+.container-content{
+    min-width: 100vw;
+    height: 100vh;
+    position: relative;
+    transition: transform 1s linear;
+    transform: translateX(0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    overflow: hidden;
+}
+
+
+/* botoes de transicao */
+#dirDireita, #dirEsquerda{
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    background-color: white;
+    width: 56px;
+    height: 56px;
+    border: 2px solid #000000;
+    border-radius: 100px;    
+    box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: unset;
+    font-size: 2.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#dirDireita:nth-child(1)::after{
+    content: "Caracteristicas";
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+
+#dirEsquerda:nth-child(1)::after{
+    content: "Sobre";
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+
+#dirDireita:nth-child(2)::after{
+    content: "Personagens";
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+#dirEsquerda:last-child:after{
+    content: "Caracteristicas";
+    font-size: 16px;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+
+#dirEsquerda{
+    left: 3rem;
+}
+
+
+/* Tela 1 */
+
+.container-text-informative{
+    width: 39rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* .informative-border-wrap{
+    max-width: 41rem;
+    position: relative;
+    background: linear-gradient(to right, black, white);
+    padding: 3px;
+} */
+
+
+.container-text-informative span:nth-child(2){
+    font-weight: 400;
+    line-height: 2.7rem;
+    font-family: 'Noticia Text', serif;
+    font-size: 2.09rem;
+}
+
+.container-text-informative span:nth-child(1){
+    font-size: 2.6rem;
+    font-weight: 600;
+    line-height: 2.7rem;
+}
+
+.container-content img:nth-child(2), img:nth-child(3), img:nth-child(4){
+position: absolute;
+}
+
+.container-content img:nth-child(2){
+    top: -15rem;
+    left: -17.4rem;
+    rotate: -160.28deg;
+    width: 729.44px;
+    height: 476.81px;
+}
+
+.container-content img:nth-child(3){
+    top: -19.5rem;
+    right: -23.4rem;
+    rotate: 0deg;
+}
+
+.container-content img:nth-child(4){
+    bottom: -18.5rem;
+    right: -16.4rem;
+    rotate: 12.67deg;
+    width: 795.07px;
+    height: 529px;
+} 
+
+/* Key frames */
+@keyframes transicaoDireita {
+    0%{transform: translateX(50vw);}
+
+    100%{transform: translateX(250vw);}
+    
+  }
+
+  @keyframes transicaoEsquerda {
+
+        0%{transform: translateX(-50vw);}
+
+        100%{transform: translateX(-250vw);}
+        
+
+  }
+
+  @keyframes textoBrilhando{
+
+    0% {
+        text-shadow: 0px 0px 20px #FF6700;
+        color: #f7eee8;
+    }
+    50%{
+
+        text-shadow: 0px 0px 10px #BE7A4C;
+        color: #cfc3bb;
+    }
+    100%{
+        text-shadow: 0px 0px 20px #FF6700;
+        color: #f7eee8;
+    }
+  }
+

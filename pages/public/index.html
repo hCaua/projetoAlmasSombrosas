@@ -5,26 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Almas sombrias</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/javascript.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
 </head>
 <body>
     <div class="transicao t-direita"></div>
     <div class="transicao t-esquerda"></div>
+    <div class="transicao t-full"></div>
 
-    <div id="tela1" data-indice="1" class="div1">
-        <button id="dirDireita" onclick="dirDireita()" >></button>
+    <div id="telaStart" class="telaStart">
+        <div id="telaStartInner" class="telaStartInner">
+            <img src="../../assets/imgs/startBanner.svg" alt="">
+            <span>Clique em qualquer lugar</span>
+        </div>
     </div>
 
-    <div id="tela2" data-indice="2" class="div2">
-        <button id="dirEsquerda" onclick="dirEsquerda()"><</button>
+    <div id="tela1" class="container-content">
+        <button id="dirDireita" onclick="dirDireita()" ><i class="uil uil-arrow-right"></i></button>
+
+        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
+        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
+        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
+
+        <img src="../../assets/imgs/artoriasBnW.svg" height="90%">
+
+        <!-- <div class="informative-border-wrap"> -->
+            <div class="container-text-informative">
+                <span>Dark Souls</span>
+                <span>Dark Souls é uma série de jogos de RPG de ação conhecida por sua 
+                    jogabilidade desafiadora e ambientação sombria de fantasia medieval. Os 
+                    jogadores exploram cenários perigosos, lutam contra inimigos mortais e 
+                    enfrentam chefes intimidadores, enquanto aprendem a história de seu mundo sombrio e misterioso.</span>
+            </div>
+        <!-- </div> -->
+    </div>
+
+    <div id="tela2" class="container-content">
+        <button id="dirEsquerda" onclick="dirEsquerda()"><i class="uil uil-arrow-left"></i></button>
         
-        <button id="dirDireita" onclick="dirDireita()">></button>
+        <button id="dirDireita" onclick="dirDireita()"><i class="uil uil-arrow-right"></i></button>
     </div>
 
-    <div id="tela3" data-indice="3" class="div3">
-        <button id="dirEsquerda" onclick="dirEsquerda()"><</button>
+    <div id="tela3" class="container-content">
+        <button id="dirEsquerda" onclick="dirEsquerda()"><i class="uil uil-arrow-left"></i></button>
 
     </div>
 </body>
 </html>
+
+<script src="js/index.js"></script>

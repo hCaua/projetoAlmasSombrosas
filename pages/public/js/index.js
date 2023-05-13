@@ -1,13 +1,22 @@
 var telas = []
+for (i = 1; i <= 3; i++){
+    var tela = document.querySelector(`[id="tela${i}"]`) 
+    
+    telas.push(tela)
+}
 
+var transicaoFull
+transicaoFull = document.querySelector(".t-full")
 
- document.addEventListener('DOMContentLoaded', function() {
-    for (i = 1; i <= 3; i++){
-        var tela = document.querySelector(`[id="tela${i}"]`) 
-        
-        telas.push(tela)
-    }
- }, false);
+var telaStart
+telaStart = document.querySelector("#telaStart")
+
+transicaoFull.addEventListener('click', function(){
+transicaoFull.style.opacity = "100";
+setTimeout(() => { telaStart.style.display = "none", transicaoFull.style.transition = "opacity 2s ease-in", transicaoFull.style.opacity = "0"}, 1200);
+setTimeout(() => { transicaoFull.style.display = "none";}, 3300);
+})
+
 
 
  var distanciaCarrosel = 0
