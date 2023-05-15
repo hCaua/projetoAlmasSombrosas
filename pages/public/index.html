@@ -12,7 +12,12 @@
 <body>
     <div class="transicao t-direita"></div>
     <div class="transicao t-esquerda"></div>
-    <div class="transicao t-full"></div>
+    <div id="t-full" class="transicao t-full"></div>
+
+    <nav>
+        <a href="Login.html">Login</a>
+        <a href="Cadastro.html">Cadastro</a>
+    </nav>
 
     <div id="telaStart" class="telaStart">
         <div id="telaStartInner" class="telaStartInner">
@@ -24,9 +29,10 @@
     <div id="tela1" class="container-content">
         <button id="dirDireita" onclick="dirDireita()" ><i class="uil uil-arrow-right"></i></button>
 
-        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
-        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
-        <img src="../../assets/imgs/falseInkSplashEffect.svg" alt="">
+
+        <img src="../../assets/imgs/inkSplashEffect.png" alt="">
+        <img src="../../assets/imgs/inkSplashEffect2.png" alt="">
+        <img src="../../assets/imgs/inkSplash3.png" alt="">
 
         <img src="../../assets/imgs/artoriasBnW.svg" height="90%">
 
@@ -41,17 +47,179 @@
 
     <div id="tela2" class="container-content">
         <button id="dirEsquerda" onclick="dirEsquerda()"><i class="uil uil-arrow-left"></i></button>
+            
+            <img src="../../assets/imgs/crackEffect.svg" alt="">    
+            <img src="../../assets/imgs/crackEffect2.svg" alt="">
+            <img src="../../assets/imgs/crackEffect2.svg" alt="">    
+            
             <div class="container-text-informative">
-                <span>Dark Souls</span>
-             </div>
+                <span>Características</span>
+                
+                <div class="caracteristicList">
+                    <details>
+                        <Summary>Jogabilidade desafiadora</Summary>
+                        <p>Dark Souls é conhecido por sua dificuldade implacável e sistema de morte permanente. O jogador enfrenta inimigos difíceis e chefes poderosos, enquanto gerencia sua saúde, resistência e recursos limitados.</p>
+                    </details>
 
+                    <details>
+                        <Summary>Narrativa enigmática</Summary>
+                        <p>A história de Dark Souls é contada principalmente por meio de sua ambientação e elementos de gameplay, com pouca narrativa direta. A narrativa é cheia de mistérios e nuances, e muitas vezes é deixada para o jogador interpretar e descobrir.</p>
 
+                    </details>
+        
+                    <details>
+                        <Summary>Mundo sombrio e opressivo</Summary>
+                        <p>O mundo de Dark Souls é um lugar desolado e sombrio, repleto de ruínas antigas, castelos ameaçadores e criaturas monstruosas. A atmosfera é opressiva e muitas vezes deprimente, com poucos personagens ou locais que oferecem </p>
+
+                    </details>
+
+                    <details>
+                        <Summary>Customização de personagem e habilidades</Summary>
+                        <p>Em Dark Souls, o jogador pode personalizar seu personagem com diferentes equipamentos, armas e magias. Existem várias classes de personagens para escolher, cada uma com seus próprios pontos fortes e fracos. Além disso, o jogador pode aprimorar suas habilidades através de pontos de experiência ganhos por matar inimigos e chefes.</p>
+
+                    </details>
+
+                    <details>
+                        <Summary>Cooperação e invasão online</Summary>
+                        <p>Dark Souls permite que os jogadores cooperem para enfrentar inimigos difíceis e chefes, além de invadirem o mundo de outros jogadores para enfrentá-los em batalhas PvP (player versus player).</p>
+
+                    </details>
+
+                    <details>
+                        <Summary>Mundos interconectados</Summary>
+                        <p>Dark Souls é conhecido por seus mundos interconectados e ambientes labirínticos, que permitem ao jogador explorar grandes áreas sem transições ou carregamentos entre elas.</p>
+
+                    </details>
+                </div>
+            </div>
+
+            <div class="ytPlayer">
+                <iframe width="720" height="400" src="https://www.youtube.com/embed/oX0cvtjKt9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
         <button id="dirDireita" onclick="dirDireita()"><i class="uil uil-arrow-right"></i></button>
     </div>
 
     <div id="tela3" class="container-content">
-        <button id="dirEsquerda" onclick="dirEsquerda()"><i class="uil uil-arrow-left"></i></button>
 
+        <img src="../../assets/imgs/inkSplashEffect2.svg" alt="">    
+        <img src="../../assets/imgs/inkSplashEffect3.svg" alt="">
+
+
+        <button class="lastDirEsquerda" id="dirEsquerda" onclick="dirEsquerda()"><i class="uil uil-arrow-left"></i></button>
+
+        <span class="personagensTittle">Personagens</span>
+
+        <div id="bossesContainer" class="bossesContainer">
+
+            <div class="bossCard" data-value="0">
+                <img src="../../assets/imgs/artoriasCard.png" alt="">
+                
+            <div id="bossCardInfo" class="bossCardInfo">
+                    <div class="tituloNome">
+                        <h3>Artorias</h3>
+                        <h5>O caminhante do abismo</h5>
+                    </div>
+
+                    <span>
+                        Um dos Quatro Cavaleiros de Gwyn, ele é lendário pela sua habilidade fenomenal 
+                        com a lâmina e força de vontade, sendo admirado por muitos e possivelmente o 
+                        cavaleiro mais popular entre as pessoas em geral. 
+                        Ele criou o grande lobo cinzento, Sif, desde a sua infância, e ambos se tornaram companheiros inseparáveis.
+                    </span>
+
+                    <div class="bossAudioPlayer">
+                        <span>ARTORIAS OF THE ABYSS</span>
+                        <audio controls>
+                            <source src="../../assets/audio/Dark Souls Artorias of the Abyss OST Knight Artorias HQ.mp3" type="audio/ogg">
+                        </audio>
+                    </div>
+
+            </div>
+
+            </div>
+
+            <div class="bossCard" data-value="0">
+                <img src="../../assets/imgs/lordGwyn.png" alt="">
+                
+                <div id="bossCardInfo" class="bossCardInfo">
+                    <div class="tituloNome">
+                        <h3>Gwyn</h3>
+                        <h5>Lorde das cinzas</h5>
+                    </div>
+
+                    <span>
+                        Gwyn Lorde das cinzas, outrora conhecido como Lord da Luz do sol, 
+                        foi um dos quatros lordes originais emergidos durante o alvorecer da Era Fogo e o Principal 
+                        antagonista e chefe Final de Dark Souls. Seus Atos são marcados pela forja de uma coalizão entres os 
+                        três lordes originais e a extinção dos Dragões, resultando no inicio efetivo de uma nova era. 
+                    </span>
+
+                    <div class="bossAudioPlayer">
+                        <span>PLIM PLIM PLOM</span>
+                        <audio controls>
+                            <source src="../../assets/audio/Gwyn Lord of Cinder  Dark Souls Soundtrack.mp3" type="audio/ogg">
+                        </audio>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bossCard" data-value="0">
+                <img src="../../assets/imgs/sifCard.png" alt="">
+                
+                <div id="bossCardInfo" class="bossCardInfo">
+                    <div class="tituloNome">
+                        <h3>Sif</h3>
+                        <h5>A grande loba cinza</h5>
+                    </div>
+
+                    <span>
+                        Antes de se tornar guardiã do túmulo de Artorias, Sif era a companheira leal do cavaleiro e o acompanhava em suas missões.
+                        Com a morte de Artorias, Sif assumiu a missão de proteger o túmulo e a espada do cavaleiro, 
+                        que representava uma das poucas esperanças de salvar o mundo de uma maldição mortal.
+                    </span>
+
+                    <div class="bossAudioPlayer">
+                        <span>GREAT GRAY WOLF SIF</span>
+                        <audio controls>
+                            <source src="../../assets/audio/Great Grey Wolf Sif  Dark Souls Soundtrack.mp3" type="audio/ogg">
+                        </audio>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bossCard" data-value="0">
+                <img src="../../assets/imgs/NKingCard.png" alt="">
+                
+                <div id="bossCardInfo" class="bossCardInfo">
+                    <div class="tituloNome">
+                        <h3>Rei sem nome</h3>
+                        <h5>Rei da tempestade</h5>
+                    </div>
+
+                    <span>
+                        O Rei Sem Nome foi um deus da guerra e caçador de dragões, na Era dos Deuses, 
+                        que herdou o poder dos relâmpagos. Mas, em busca da aliança com os antigos dragões,
+                        ele sacrificou tudo o que tinha. Com sua coragem e habilidade inigualáveis, 
+                        ele conquistou um Fera da Tempestade e estabeleceu uma forte conexão com ela, 
+                        liderando-a em inúmeras batalhas. 
+                    </span>
+
+                    <div class="bossAudioPlayer">
+                        <span>NAMELESS KING</span>
+                        <audio controls>
+                            <source src="../../assets/audio/Dark Souls 3 OST  Nameless King HQ.mp3" type="audio/ogg">
+                        </audio>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </body>
 </html>

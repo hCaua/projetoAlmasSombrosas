@@ -20,6 +20,35 @@ img, svg, video{
     display: block;
 }
 
+
+/* css da tela start */
+body nav{
+    display: flex;
+    position: absolute;
+    top: 2rem;
+    right: 15rem;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #000000b0;
+    gap: 1rem;
+    border-radius: 11px;
+    color: white;
+    z-index: 1;
+}
+
+body nav a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Noticia Text', serif;
+    cursor: pointer;
+    transition: color 0.5s;
+}
+
+body nav a:hover{
+    color: rgb(202, 202, 202);
+}
+
 /* css da tela */
 .transicao{
     width: 50%;
@@ -76,7 +105,7 @@ img, svg, video{
     min-width: 100vw;
     height: 100vh;
     position: relative;
-    transition: transform 1s linear;
+    transition: transform 1s ease-in-out;
     transform: translateX(0);
     display: flex;
     align-items: center;
@@ -85,7 +114,7 @@ img, svg, video{
     overflow: hidden;
 }
 
-#tela1::after{
+#tela1::after, #tela2::after, #tela3::after{
     content: "";
     position: absolute;
     top: 0;
@@ -132,13 +161,14 @@ img, svg, video{
     font-weight: 400;
 }
 
-#dirDireita:nth-child(2)::after{
+#dirDireita:last-child:after{
     content: "Personagens";
     font-size: 16px;
     font-family: 'Cinzel', serif;
     font-weight: 400;
 }
-#dirEsquerda:last-child:after{
+
+.lastDirEsquerda:after{
     content: "Caracteristicas";
     font-size: 16px;
     font-family: 'Cinzel', serif;
@@ -182,31 +212,260 @@ img, svg, video{
     line-height: 2.7rem;
 }
 
-#tela1 img:nth-child(2), img:nth-child(3), img:nth-child(4){
-position: absolute;
-}
-
-#tela1 img:nth-child(2){
-    top: -15rem;
-    left: -17.4rem;
-    rotate: -160.28deg;
-    width: 729.44px;
-    height: 476.81px;
+#tela1 img:nth-child(2) {
+    top: 0;
+    right: 0;
+    rotate: 360deg;
+    position: absolute;
+    pointer-events: none;
 }
 
 #tela1 img:nth-child(3){
-    top: -19.5rem;
-    right: -23.4rem;
-    rotate: 0deg;
+    bottom: 0;
+    right: 0;
+    rotate: 0;
+    position: absolute;
+    pointer-events: none;
 }
 
 #tela1 img:nth-child(4){
-    bottom: -18.5rem;
-    right: -16.4rem;
-    rotate: 12.67deg;
-    width: 795.07px;
-    height: 529px;
-} 
+    top: 0;
+    left: 0;
+    rotate: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+
+
+/* tela 2 */
+#tela2 .container-text-informative {
+height: 30rem;
+background-color: unset;
+width: 32rem;
+}
+
+.caracteristicList{
+    display: flex;
+    flex-direction: column;
+    max-height: 32rem;
+    gap: 3.3rem;
+    overflow-y: scroll;
+}
+
+.caracteristicList summary{
+    font-size: 1.7rem;
+    letter-spacing: 0.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Noticia Text', serif;
+}
+
+.caracteristicList details:nth-child(4){
+    line-height: 2rem;
+}
+
+
+
+.caracteristicList p{
+    line-height: 2.4rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-bottom: 0;
+    width: 87%;
+    font-family: 'Noticia Text', serif;
+
+}
+
+.caracteristicList::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    height: 5px;
+    background-color: #5555559c; 
+}
+
+.caracteristicList::-webkit-scrollbar-thumb {
+    background: #666666;
+    width: 5px;
+    border-radius: 10px;
+  }
+
+  #tela2 .ytPlayer{
+    box-shadow: 0px 0px 20px 2px black;
+    position: relative;
+  }
+
+
+    #tela2 .ytPlayer::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0.3rem;
+    border-right: rgba(0, 0, 0, 0.692) solid 0.3rem;
+    border-bottom: rgba(0, 0, 0, 0.692) solid 0.3rem;
+    z-index: -1;
+  }
+
+  #tela2 img:nth-child(2){
+    position: absolute;
+    width: 536.11px;
+    height: 617.81px;
+    top: -292px;
+    left: -69px;
+    rotate: 94deg;
+    z-index: -1;
+    }
+
+    
+  #tela2 img:nth-child(3){
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    }
+
+    
+  #tela2 img:nth-child(4){
+    position: absolute;
+    bottom: -39px;
+    left: 112px;
+    width: 700px;
+    rotate: 52deg;
+    z-index: -1;
+}
+
+
+/* Tela 3 */
+
+#tela3{
+    flex-direction: column;
+}
+
+.bossesContainer{
+    max-width: 80%;
+    width: 80%;
+    overflow-x: scroll;
+    display: flex;
+    gap: 5rem;
+    padding-bottom: 10px;
+}
+
+.bossesContainer::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    height: 5px;
+    background-color: #5555559c; 
+}
+
+.bossesContainer::-webkit-scrollbar-thumb {
+    background: #666666;
+    width: 5px;
+    border-radius: 10px;
+  }
+
+.bossCard img{
+    min-height: 638px;
+    min-width: 996px;
+    transform: translateX(-10rem)  skew(-345deg);
+    transition:  transform 0.3s;
+    position: absolute;
+    z-index: -1;
+
+}
+.bossCard{
+    overflow: hidden;
+    min-width: 245px;
+    width: 245px;
+    height: 638px;
+    transform: translateX(6rem) skew(345deg);
+    filter: grayscale(100%);
+    transition: filter 0.3s, min-width 0.3s;
+    cursor: pointer;
+    position: relative;
+    display: grid;
+}
+
+.bossCardInfo{
+    height: 100%;
+    width: 40%;
+    color: white;
+    justify-self: end;
+    background-color: #0000008c;
+    padding: 0 1.5rem;
+    box-shadow: 2px 0 30px 30px #0000008c;
+    display: grid;
+    transform: translateX(25rem);
+    transition:  transform 0.3s;
+}
+
+.tituloNome{
+    padding: 1rem 0 0 0;
+}
+
+.tituloNome h3, .tituloNome h5 {
+    margin: 0;
+    transform: skew(-345deg);
+}
+
+.tituloNome h3{
+    line-height: 2rem;
+    font-size: 2rem;
+}
+.tituloNome h5{
+    font-size: 1.2rem;
+}
+
+.bossCardInfo span{
+    font-family: 'Noticia Text', serif;
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+}
+
+
+
+.bossCardInfo .bossAudioPlayer{
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    justify-self: end;
+    transform: skew(-345deg);
+}
+
+.bossCardInfo .bossAudioPlayer span{
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Noticia Text', serif;
+    padding-left: 1.5rem;
+}
+
+
+
+
+#tela3 .personagensTittle{
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding-right: 60vw;
+}
+
+
+#tela3 img:nth-child(1){
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#tela3 img:nth-child(2){
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+    
+
 
 /* Key frames */
 @keyframes transicaoDireita {
