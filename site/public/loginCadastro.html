@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almas sombrias - Login</title>
+    <link rel="stylesheet" href="css/loginCadastro.css">
+</head>
+<body>
+        <div class="fadeDiv">
+            <div class="divForm">
+                <div class="formHeader">
+                    <span class="ativo" id="loginSwitch">Login</span>
+                    <span class="" id="cadastroSwitch">Cadastro</span>
+                </div>
+
+
+                <div formElemnt="1" estado = "1" class="formBody">
+                    <div class="formInput">
+                        <span>Usúario</span>
+                        <input id="i_usuarioLogin" type="text">
+                    </div>
+
+                    <div class="formInput">
+                        <span>Senha</span>
+                        <input id="i_senhaLogin" type="password">
+                    </div>
+                </div>
+
+                <div id="formularioCadastro" formElemnt="2" estado = "0" style="display: none;" class="formBody">
+                    <div class="formInput">
+                        <span>Usúario</span>
+                        <input id="i_usuario" type="text">
+                    </div>
+
+                    <div class="formInput">
+                        <span>Senha</span>
+                        <input id="i_senha" type="password">
+                    </div>
+
+                    <div class="formInput">
+                        <span>Confirmar senha</span>
+                        <input id="i_confirmarSenha" type="password">
+                    </div>
+
+                    <div class="formInput">
+                        <span>Email</span>
+                        <input id="i_email" type="text">
+                    </div>
+                </div>
+
+                <div formElemnt="3" estado="1" class="formFooter">
+                    <button onclick="login()">ENTRAR</button>
+                </div>
+
+                <div formElemnt="4" estado="0" style="display: none;" class="formFooter">
+                    <button onclick="cadastrar()">CADASTRAR</button>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+
+<script src="js/loginCadastro.js"></script>
+
+<script>
+    function cadastrar(){
+        var usuarioVar = i_usuario.value;
+        var emailVar = i_email.value;
+        var senhaVar = i_senha.value;
+        var confirmarSenha = i_confirmarSenha.value
+
+        if (usuarioVar == "" || emailVar == "" || senhaVar == "" || confirmarSenha == "") {
+            alert("Insira algo, por favor.")
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                usuarioServer: usuarioVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta){
+            console.log("Resposta: ", resposta);
+
+            if(resposta.ok) {
+                alert("cadastro realizado com sucesso.")
+                
+                Array.from(formElements).forEach(formElement => {
+
+                if(loginSwitch.classList.contains("ativo")){
+                    console.log("XD")
+                }else{
+                    if(formElement.getAttribute("estado") == 0){
+
+                        formElement.setAttribute ("estado", 1)
+                        formElement.style.display = "flex"
+                    }else {
+                        formElement.setAttribute ("estado", 0)
+                        formElement.style.display = "none"
+                        
+                    }
+                }
+                })
+
+                if(cadastroSwitch.classList.contains("ativo")){
+                cadastroSwitch.classList.remove("ativo")
+                }
+                loginSwitch.classList.add("ativo")
+
+
+                limparFormulario()
+
+            } else {
+                throw("Erro ao tentar realizar cadastro.")
+                alert("Erro ao tentar realizar cadastro.")   
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`)
+        })
+
+        return false;
+    }
+
+    function login(){
+        var usuarioLoginVar = i_usuarioLogin.value;
+        var senhaLoginVar = i_senhaLogin.value;   
+
+        if (usuarioLoginVar == "" || senhaLoginVar == "") {
+            alert("Insira algo, por favor.")
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                usuarioLoginServer: usuarioLoginVar,
+                senhaLoginServer: senhaLoginVar
+            })
+        }).then(function (resposta) {
+
+            if(resposta.ok){
+                console.log(resposta)
+
+                resposta.json().then(json => {
+                    console.log(json)
+                    console.log(JSON.stringify(json))
+
+                    sessionStorage.emailUsuario = json.email
+                    sessionStorage.userUsuario= json.userName
+                    sessionStorage.idUsuario = json.idUsuario
+
+                    window.location = "./spotSouls/spotSouls.html";
+                })
+            }else{
+                alert("Erro ao tentar realizar login.")
+
+                resposta.text().then(texto => {
+                    console.error(texto)
+                })
+            }
+        }).catch(function(erro) {
+            console.log(erro)
+        })
+        return false
+    }
+</script>

@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');   
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+
+    font-size: 1.20rem;
+    line-height: 1.2rem;
+    font-family: 'Cinzel', serif;
+    
+}
+
+img, svg, video{
+    max-width: 100%;
+    display: block;
+}
+
+
+/* Tela */
+
+body{
+background-image: url(../assets/imgs/loginCadBanner.jpg);
+background-size: cover;
+height: 100vh;
+justify-content: end;
+background-position-x: -3rem;
+}
+
+body::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0px 4px 117px 50px #00000094;
+    z-index: 2;
+    pointer-events: none;
+    animation: boxshadowBreath 5s linear infinite;
+}
+
+.fadeDiv{
+    width: 50%;
+    background: linear-gradient(273.02deg, #000000f2 20.95%, rgba(0, 0, 0, 0) 97.28%);
+    display: flex;
+    justify-content: end;
+    padding: 5rem 5rem 0 0;
+}
+
+.divForm{
+
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    width: 40%;
+}
+
+.formHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ativo{
+    background: radial-gradient(50.43% 42.11% at 50.43% 50%, rgba(255, 103, 0, 0.31) 0%, rgba(190, 122, 76, 0) 100%);
+    background-size: cover;  
+    font-weight: 500;
+}
+
+.formHeader span{
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 0.5rem 1rem;
+}
+
+.formBody{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+}
+
+.formInput{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formInput span{
+    padding: 0 1rem;
+    font-size: 1rem;
+    color: #b9b2b261;
+}
+
+.formInput input{
+    font-family: 'Cinzel';
+    padding: 0.7rem 1rem;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    border-bottom: 2px solid #5A5858;
+}
+
+.formInput input:focus{
+    outline: none;
+    background: linear-gradient(360deg, #ff660073 -120.05%, rgba(190, 122, 76, 0) 64.29%);
+    border-bottom: 2px solid #80430C;
+}
+
+.formBody h4{
+    font-weight: 500;
+}
+
+.formFooter{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.formFooter button{
+    background: radial-gradient(113.55% 67.86% at 50.26% 50%, rgba(190, 122, 76, 0) 0%, rgba(255, 103, 0, 0.18) 100%);
+    border: 1px solid #80430C;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Cinzel';
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14rem;
+    height: 3rem;
+}
