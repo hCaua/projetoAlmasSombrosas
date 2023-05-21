@@ -35,4 +35,5 @@ module.exports = {
     login,
     cadastrar,
     listar,
+    
 };

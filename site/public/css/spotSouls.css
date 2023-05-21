@@ -1,0 +1,327 @@
+/* configs padrões */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');   
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap');
+body{
+    margin: 0;
+    padding: 3rem 2rem 2rem 2rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 2rem;
+    font-size: 1.20rem;
+    line-height: 1.2rem;
+    font-family: 'Cinzel', serif;
+    background-color: #111111;
+}
+
+img, svg, video{
+    max-width: 100%;
+    display: block;
+}
+
+
+/* leftSide css */
+
+.leftSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    max-height: 51rem;
+    overflow-y: auto;
+}
+
+.userInfos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 1rem;
+    background-color: #1A1818;
+    border-radius: 15px;
+}
+
+.userInfos .userTittle #username{
+    font-size: 1.2rem;
+    letter-spacing: .1rem;
+    color: white;
+    padding-left: .3rem;
+    font-family: 'Noticia Text', serif;
+}
+
+.userInfos .userTittle #subTittle{
+    background: none;
+    color: #696969;
+    font-size: .9rem;
+    border: 0;
+}
+.userInfos .userTittle #subTittle:focus{
+    outline: 1px solid gray;
+}
+
+.userInfos img{
+    width: 3rem;
+    cursor: pointer;
+}
+
+
+/* navbar css */
+.navbar{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #1A1818;
+    padding: 1.5rem .5rem;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.navbar a{
+    text-decoration: none;
+    width: 90%;
+}
+
+.navItem{
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    font-size: 1.4rem;
+   
+    font-family: "Noticia Text";
+    color: white;
+    border-radius: 15px;
+    align-items: center;
+}
+
+.ativo{
+    background: rgba(0, 0, 0, 0.46);
+}
+
+.navItem img{
+    width: 1.5rem;
+}
+
+.musicPlayer{
+    height: 15rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../assets/imgs/strayDemonBanner.jpg);
+    box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    position: relative;
+}
+
+.musicPlayer .fade{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0.03deg, #020202 27.21%, rgba(2, 2, 2, 0.12) 87.58%);
+    border-radius: 15px;
+}
+
+
+/* lista de favoritos */
+
+.favoritas{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #1A1818;
+    padding: 1.5rem 1.2rem;
+    border-radius: 15px;
+    min-height: 25rem;
+    max-height: 25rem;
+}
+.leftSide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .listaFavoritas::-webkit-scrollbar {
+    display: none;
+  }
+
+.favoritas>:nth-child(1){
+color: #777777;
+font-size: 1.1rem;
+font-weight: 500;
+}
+
+.listaFavoritas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-height: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+.musicaFavoritada{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.musicaFavoritada img{
+    border-radius: 10px;
+    width: 70px;
+    height: 70px;
+    object-fit:cover;
+}
+
+#tituloMfavorita{
+    color: white;
+    font-size: 1.1rem;
+    font-family: "Noticia Text";
+}
+
+#criadorMfavorita{
+    font-size: .7rem;
+    color: #777777;
+}
+
+.musicaFavoritada a{
+text-decoration: none;
+}
+
+
+
+
+
+/* right side css */
+
+.rightSide{
+    display: flex;
+    flex-direction: column;
+    gap: 3.1rem;
+    align-items: center;
+}
+
+.rightSide #pesquisarMusica{
+    background-color: unset;
+    border: 4px solid #1A1818;
+    border-radius: 50px;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    color: white;
+    font-family: "Noticia Text";
+    letter-spacing: .1rem;
+    width: 80%;
+}
+
+.rightSide #pesquisarMusica:focus{
+    outline: 1px #1A1818 solid;
+}
+
+.musicFeed{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 4rem;
+    background-color: #1A1818;
+    border-radius: 15px;
+    min-height: 39.4rem;
+    max-height: 39.4rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 90%;
+}
+
+
+#luckyFind{
+    width: 70rem;
+    height: 330px;
+    background-color: white;
+    background-image: url("../assets/imgs/spinning-fish.gif");
+    background-size: 80%;
+    background-position: right;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 15px;
+    padding: 1rem 2rem;
+}
+
+#luckyFind .fade{
+    background: linear-gradient(90.29deg, #010101 21.09%, rgba(0, 0, 0, 0) 100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 13px;
+    z-index: 0;
+}
+
+.LFTittle{
+    display: flex; 
+    flex-direction: column;
+    z-index: 1;
+    gap: .5rem;
+}
+
+.LFTittle span:nth-child(1){
+    font-family: 'Noticia Text';
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    letter-spacing: 0.05em;
+    color: #777777;
+}
+
+.LFTittle #LFTitulo{
+    font-family: 'Cinzel';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+}
+
+#textinhoBoss{
+    width: 352px;
+
+    font-family: 'Cinzel';
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.opcoes{
+    display: flex;
+    z-index: 1;
+    gap: 1rem;
+}
+
+.opcoes button{
+    background: #111111;
+    border-radius: 40px;
+    width: fit-content;
+    border: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+    width: 4rem;
+    cursor: pointer;
+}
+
+.opcoes button:nth-child(1) img{
+width: 2rem;
+}
+
+.opcoes button:nth-child(2){
+    font-size: 1.8rem;
+    letter-spacing: .1rem;
+    color: white;
+    width: 10rem;
+    font-family: "Noticia Text";
+}

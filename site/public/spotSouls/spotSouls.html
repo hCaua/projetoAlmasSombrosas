@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotSouls - Inicio</title>
+    <link rel="stylesheet" href="../css/spotSouls.css">
+</head>
+<body>
+    <div class="leftSide">
+        <div class="userInfos">
+            <div class="userTittle">
+                <span id="username">USERNAME</span>
+                <select id="subTittle">
+                    <option value="1">The chosen undead</option>
+                    <option value="2">The Bearer of the Curse </option>
+                    <option value="3">The ashen One</option>
+                </select>
+            </div>
+
+            <!-- icone do usuario aqui -->
+                <img src="../assets/imgs/userIcon.svg" alt="">
+        </div>
+
+        
+        <div class="navbar">
+            <a href="">
+                <div class="navItem ativo">
+                    <img src="../assets/imgs/inicioIcon.svg" alt="">
+                    <span>Início</span>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="navItem">
+                    <img src="../assets/imgs/favoritosIcon.svg" alt="">
+                    <span>Favoritos</span>
+                </div>
+            </a>
+
+            <div style="display: none;" class="musicPlayer">
+                <div class="fade"></div>
+            </div>
+        </div>
+
+        <div class="favoritas">
+            <span>Músicas favoritas</span>
+
+            <div class="listaFavoritas">
+                <div class="musicaFavoritada">
+                    <img src="../assets/imgs/strayDemonBanner.jpg" alt="">
+                    <div style="gap: .5rem; display: flex; flex-direction: column;">
+                        <span id="tituloMfavorita">Nome da musica</span>
+                        <a href="">
+                            <span id="criadorMfavorita">Criador da musica</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightSide">
+        <input id="pesquisarMusica" type="search" placeholder="Pesquise uma musica">
+
+        <div class="musicFeed">
+            <div id="luckyFind">
+                <div class="fade"></div>
+
+                <div class="LFTittle">
+                    <span>Lucky Find!</span>
+                    <span id="LFTitulo">NOME DA MUSICA</span>
+                </div>
+
+                <span id="textinhoBoss">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus laoreet ex, sed tincidunt arcu fringilla sit amet. In vulputate nulla dui, quis luctus mauris finibus nec.</span>
+                
+                <div class="opcoes">
+                    <button>
+                        <img src="../assets/imgs/curtidaIcon.svg" alt="">
+                    </button>
+
+                    <button>
+                        Tocar
+                    </button>
+                </div>
+            </div>
+
+            <div id="sliderMusicas">
+                <span>DARK SOULS</span>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
