@@ -20,6 +20,9 @@ img, svg, video{
     display: block;
 }
 
+:root{
+    --plyr-color-main: #252525;
+}
 
 /* leftSide css */
 
@@ -106,10 +109,74 @@ img, svg, video{
     width: 100%;
     background-size: cover;
     background-position: center;
-    background-image: url(../assets/imgs/strayDemonBanner.jpg);
+   
     box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     position: relative;
+    overflow: hidden;
+}
+
+.musicPlayer .plyr__video-embed{
+    display: none;
+}
+
+.musicPlayer .plyr--video{
+    height: 100%;
+}
+
+.musicPlayer #player img{
+    border-radius: 10px;
+    object-fit: cover;
+    height: 100%;
+}
+
+#musicInfos {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#musicInfos .musicCardTittleSubTittle{
+    width: 80%;
+    padding-left: 10px;
+    width: fit-content;
+    min-width: 77%;
+    max-width: 77%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 5px;
+}
+
+#musicInfos #musicCardTittle:hover{
+    animation: textShow 6s ease infinite;
+}
+
+@keyframes textShow {
+    0%{transform: translateX(0)}
+
+    100%{transform: translateX(-60%)}
+}
+
+#musicInfos #musicCardsubtittle{
+    font-size: .7rem;
+}
+#musicInfos .gameN, #musicInfos #musicCardsubtittle{
+line-height: 10px;
+}
+
+#musicInfos button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    height: fit-content;
+
+}
+
+#musicInfos button img {
+    width: 35px;
 }
 
 .musicPlayer .fade{
@@ -152,7 +219,7 @@ font-weight: 500;
 .listaFavoritas{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     gap: 1rem;
     min-height: 90%;
     max-height: 90%;
@@ -170,6 +237,7 @@ font-weight: 500;
     width: 70px;
     height: 70px;
     object-fit:cover;
+    cursor: pointer;
 }
 
 #tituloMfavorita{
@@ -238,7 +306,7 @@ text-decoration: none;
 #luckyFind{
     height: 330px;
     background-color: white;
-    background-image: url("../assets/imgs/spinning-fish.gif");
+
     background-size: 80%;
     background-position: right;
     background-repeat: no-repeat;
@@ -258,7 +326,18 @@ text-decoration: none;
     width: 100%;
     height: 100%;
     border-radius: 13px;
-    z-index: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#luckyFind iframe{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    border-radius: 15px;
 }
 
 .LFTittle{
@@ -315,19 +394,15 @@ text-decoration: none;
     height: 3.5rem;
     width: 3.5rem;
     cursor: pointer;
-}
 
-.opcoes button:nth-child(1) img{
-width: 1.9rem;
-}
-
-.opcoes button:nth-child(2){
     font-size: 1.7rem;
     letter-spacing: .1rem;
     color: white;
     width: 9rem;
     font-family: "Noticia Text";
 }
+
+
 
 
 /* css lista de musicas */
@@ -405,6 +480,7 @@ width: 1.9rem;
     left: 0;
     top: 0;
     z-index: -1;
+    display: none;
 }
 
 .musicCard button{
@@ -441,6 +517,9 @@ width: 1.9rem;
     color: white;
     font-family: "Noticia Text";
     z-index: 1;
+
+
+    text-overflow: ellipsis;
 }
 
 #musicCardsubtittle, .gameN{
@@ -450,8 +529,9 @@ width: 1.9rem;
     font-weight: 600;
 }
 
-#gameN{
+.gameN{
     font-family: "Noticia Text";
+    width: fit-content;
 }
 
 .musicCardTittleSubTittle div{
