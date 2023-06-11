@@ -1,0 +1,305 @@
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>SpotSouls- Musicas</title>
+
+            <link rel="stylesheet" href="../../css/spotSouls.css">
+            <link rel="stylesheet" href="../../css/musics.css">
+
+            <script src="https://www.youtube.com/iframe_api"></script>
+
+        <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+        </head>
+        <body>
+            <div class="leftSide">
+                <div class="userInfos">
+                    <div class="userTittle">
+                        <span id="username">USERNAME</span>
+                        <select id="subTittle">
+                            <option value="1">The chosen undead</option>
+                            <option value="2">The Bearer of the Curse </option>
+                            <option value="3">The ashen One</option>
+                        </select>
+                    </div>
+
+                    <!-- icone do usuario aqui -->
+                    <a href="../loginCadastro.html">
+                        <img src="../assets/imgs/botaoDeslogar.svg" alt="">
+                    </a>
+                </div>
+
+                
+                <div class="navbar">
+                    <a href="spotSouls.html">
+                        <div class="navItem">
+                            <img src="../assets/imgs/inicioIcon.svg" alt="">
+                            <span>Início</span>
+                        </div>
+                    </a>
+
+                    <a href="favoritos.html">
+                        <div class="navItem">
+                            <img src="../assets/imgs/favoritosIcon.svg" alt="">
+                            <span>Favoritos</span>
+                        </div>
+                    </a>
+
+                        <div id="musicPlayer" class="musicPlayer">
+
+                        </div>
+
+                        <div id="musicInfos">
+
+                        </div>
+
+                </div>
+
+                <div class="favoritas">
+                    <span>Músicas favoritas</span>
+
+                    <div id="listaFavoritas" class="listaFavoritas">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="rightSide">
+                
+
+                <div class="musicFeed">
+                    
+
+
+                    <div class="sliderMusicas">
+                        <span id="tituloLista"></span>
+                        
+                        <div class="musicListHorizontal" id="listaDarksouls">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </body>
+        </html>
+
+        <script>
+
+        username.innerHTML= sessionStorage.userUsuario
+        tituloLista.innerHTML = `Lista de musicas - Dark souls ${sessionStorage.serie}`
+
+        window.addEventListener("load", ()=>{
+            listarMusicas();
+            listarCurtidas()
+        })
+
+        var listaDeMusica = []
+
+
+        function listarMusicas(){
+            fetch(`/musica/listar/${sessionStorage.serie}`,
+            {cache: "no-store"})
+             .then((listaDeMusicas)=>{
+                listaDeMusicas.json().then((listaDeMusicas)=>{
+                    for(i =0; i<listaDeMusicas.length; i++){
+
+                        listaDarksouls.innerHTML += `
+                        <div class="musicCard" style=" background-image: url(../assets/imgs/${listaDeMusicas[i].vidBanner});">
+                                                      
+                            <div class="fade"></div>
+
+                            <button id = "${listaDeMusicas[i].idMusica}" onclick="tocar(this.id)" ><img src="../assets/imgs/playButtonIcon.svg" alt=""></button>
+
+                            <div class="musicCardTittleSubTittle">
+                            <a href=""><span id="musicCardTittle">${listaDeMusicas[i].nome}</span></a>
+                            <div>
+                            <a href=""><span id="musicCardsubtittle">${listaDeMusicas[i].criadorVid}</span></a>
+                            <span class="gameN">Dark souls <span id="gameN">${listaDeMusicas[i].serie}</span></span>
+                            </div>
+                            </div>
+                        </div>
+                        `
+                    }
+                })
+             })
+
+             fetch(`/musica/listar/1`,
+            {cache: "no-store"})
+             .then((listaDs1)=>{
+                listaDs1.json().then((listaDs1)=>{
+                    for(i =0; i<listaDs1.length; i++){
+
+                        listaDeMusica.push({idMusica: listaDs1[i].idMusica,
+                                                      nome: listaDs1[i].nome,
+                                                      ytId: listaDs1[i].ytVidId,
+                                                      banner: listaDs1[i].vidBanner,
+                                                      compositor: listaDs1[i].criadorVid,
+                                                      serie: listaDs1[i].serie})
+
+
+                    }
+                })
+             })
+
+             fetch(`/musica/listar/2`,
+            {cache: "no-store"})
+             .then((listaDs2)=>{
+                listaDs2.json().then((listaDs2)=>{
+                    for(i =0; i<listaDs2.length; i++){
+
+                        listaDeMusica.push({idMusica: listaDs2[i].idMusica,
+                                                      nome: listaDs2[i].nome,
+                                                      ytId: listaDs2[i].ytVidId,
+                                                      banner: listaDs2[i].vidBanner,
+                                                      compositor: listaDs2[i].criadorVid,
+                                                      serie: listaDs2[i].serie})
+
+
+                    }
+                })
+             })
+
+             fetch(`/musica/listar/3`,
+            {cache: "no-store"})
+             .then((listaDs3)=>{
+                listaDs3.json().then((listaDs3)=>{
+                    for(i =0; i<listaDs3.length; i++){
+
+                        listaDeMusica.push({idMusica: listaDs3[i].idMusica,
+                                                      nome: listaDs3[i].nome,
+                                                      ytId: listaDs3[i].ytVidId,
+                                                      banner: listaDs3[i].vidBanner,
+                                                      compositor: listaDs3[i].criadorVid,
+                                                      serie: listaDs3[i].serie})
+
+
+                    }
+                })
+             })
+        }
+
+        function tocar(id){
+
+            var musicaSelecionada = listaDeMusica.find(objeto => objeto.idMusica === parseInt(id));
+
+            musicPlayer.innerHTML = `
+
+            <div class="plyr__video-embed" id="player" >
+                    <iframe
+                    src="https://www.youtube.com/embed/${musicaSelecionada.ytId}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1"
+                    allowfullscreen
+                    allowtransparency
+                    allow="autoplay"
+                    ></iframe>
+                    <img src="../assets/imgs/${musicaSelecionada.banner}" alt="">
+            </div>
+            `
+            fetch(`/musica/curtiu/${sessionStorage.idUsuario}/${musicaSelecionada.idMusica}`, 
+            {cache: "no-store"}).then((curtiu)=>{
+                if (curtiu.status == 204){
+                                    var curtiuInterroga = 0
+
+
+                                }else{
+                                    var curtiuInterroga = 1
+
+
+                                }
+
+                                musicInfos.innerHTML = `
+                                <div class="musicCardTittleSubTittle">
+                                            <span id="musicCardTittle">${musicaSelecionada.nome}</span>
+                                            <span id="musicCardsubtittle">${musicaSelecionada.compositor}</span>
+                                            <span class="gameN">Dark souls <span id="gameN">${musicaSelecionada.serie}</span></span>
+                                </div>
+                                        
+                                        <button id="playerBotaoCurtida" idmusica = ${musicaSelecionada.idMusica} onclick = "curtir(this.getAttribute('idmusica'))">
+                                            ${curtiuInterroga === 0 ? '<img src="../assets/imgs/curtidaIcon.svg" alt="">' : '<img src="../assets/imgs/curtidaPreenchida.svg" alt="">'}
+                                        </button>
+                                `
+            })
+
+
+
+            player = new Plyr('#player', {
+                controls: ['play-large', 'play', 'progress', 'volume'],
+                fullscreen: { enabled: false },
+                settings: [],
+                autoplay: true,
+                hideControls: false,
+                resetOnEnd: false,
+                loop: { active: false }
+            });
+
+            }
+
+        function curtir(idMusica){
+            fetch(`/musica/curtiu/${sessionStorage.idUsuario}/${idMusica}`, 
+            {cache: "no-store"})
+            .then((resposta)=>{
+                if(resposta.ok){
+                    listaFavoritas.innerHTML= ""
+                        if(resposta.status == 204){
+                            fetch("/musica/curtir", {
+                                method: "post",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    idUsuario: sessionStorage.idUsuario,
+                                    idMusica: idMusica
+                                })
+                            }).then((curtido)=>{
+                                playerBotaoCurtida.innerHTML  = '<img src="../assets/imgs/curtidaPreenchida.svg" alt="">'
+                                listarCurtidas()
+                            })
+                        }else{
+                            fetch("/musica/descurtir", {
+                                method: "DELETE",
+                                headers: {
+                                    "Content-type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    idUsuario: sessionStorage.idUsuario,
+                                    idMusica: idMusica
+                                })
+                            }).then((descurtido)=>{
+                                playerBotaoCurtida.innerHTML  = '<img src="../assets/imgs/curtidaIcon.svg" alt="">'
+                                listarCurtidas()
+                            })
+                        }
+                }
+            })
+        }
+ 
+        function listarCurtidas(){
+        fetch(`/musica/curtidas/${sessionStorage.idUsuario}`, 
+            {cache: "no-store"}).then((listaCurtidas)=>{
+                if(listaCurtidas.ok){
+                    listaCurtidas.json().then((listaCurtidas)=>{
+                        for(i = 0; i < listaCurtidas.length; i++){
+
+                            listaFavoritas.innerHTML += `
+                            <div class="musicaFavoritada">
+                                <img idmusica="${listaCurtidas[i].idMusica}" onclick = "tocar(this.getAttribute('idmusica'))" src="../assets/imgs/${listaCurtidas[i].vidBanner}" onClick="tocar">
+                                <div style="gap: .5rem; display: flex; flex-direction: column;">
+                                    <span id="tituloMfavorita">${listaCurtidas[i].nome}</span>
+                                    <a href="">
+                                        <span id="criadorMfavorita">${listaCurtidas[i].criadorVid}</span>
+                                    </a>
+                                </div>
+                            </div>
+                            `
+                        }
+                    })
+                }
+            })
+    }
+       
+        </script>
+

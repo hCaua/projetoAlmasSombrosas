@@ -20,13 +20,23 @@ router.post("/curtir", function (req, res) {
     musicaController.curtir(req, res);
 });
 
+
 router.get("/curtidas/:idUsuario", function (req, res) {
     musicaController.curtidas(req, res);
+});
+
+router.get("/maisCurtidas", function (req, res) {
+    musicaController.maisCurtidas(req, res);
+});
+
+router.get("/listarQtdPorSerie/:idUsuario", function (req, res) {
+    musicaController.listarQtdPorSerie(req, res);
 });
 
 router.get("/luckyFind", function (req, res) {
     musicaController.luckyFind(req, res);
 });
+
 
 
 

@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpotSouls - Inicio</title>
     <link rel="stylesheet" href="../css/spotSouls.css">
+    <link rel="stylesheet" href="../css/favoritos.css">
     <script src="https://www.youtube.com/iframe_api"></script>
 
    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="leftSide">
@@ -31,15 +34,15 @@
 
         
         <div class="navbar">
-            <a href="">
-                <div class="navItem ativo">
+            <a href="spotSouls.html">
+                <div class="navItem ">
                     <img src="../assets/imgs/inicioIcon.svg" alt="">
                     <span>Início</span>
                 </div>
             </a>
 
             <a href="favoritos.html">
-                <div class="navItem">
+                <div class="navItem ativo">
                     <img src="../assets/imgs/favoritosIcon.svg" alt="">
                     <span>Favoritos</span>
                 </div>
@@ -68,44 +71,36 @@
         
 
         <div class="musicFeed">
+        
+        <div class="analytcs">
+            <div class="graficoPorSerie">
+                <span>Sua quantidade de curtidas por jogo</span>
+                <canvas id="graficoPorSerie"></canvas>
+            </div>
+
+            <div class="listaMaisCurtidasWrapper" ">
+                <span>Musicas mais curtidas</span>
+
+                <div class="listaMaisCurtidas" id="listaMaisCurtidas">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="sliderMusicas">
+            <span>Suas curtidas</span>
             
-            <div id="luckyyOne">
+            <div class="musicListHorizontal" id="listaDarksouls">
+                
 
             </div>
+        </div>
 
-            <div class="sliderMusicas">
-                <span>DARK SOULS</span>
-                
-                <a href="darkSoulsMusics.html" onclick="setarSerie1()">Mais musicas</a>
-                
-                <div class="musicListHorizontal" id="listaDarksouls1">
-
-                </div>
-            </div>
-
-            <div class="sliderMusicas">
-                <span>DARK SOULS 2</span>
-                
-                <a href="darkSoulsMusics.html" onclick="setarSerie2()">Mais musicas</a>
-
-                <div class="musicListHorizontal" id="listaDarksouls2">
-
-                </div>
-            </div>
-
-            <div class="sliderMusicas">
-                <span>DARK SOULS 3</span>
-                
-                <a href="darkSoulsMusics.html" onclick="setarSerie3()">Mais musicas</a>
-
-                <div class="musicListHorizontal" id="listaDarksouls3">
-
-                </div>
-            </div>
         </div>
     </div>
 </body>
 </html>
+
 
 
 <script>
@@ -113,185 +108,144 @@ username.innerHTML= `${sessionStorage.userUsuario}`
 
 window.addEventListener("load", ()=>{
     listarMusicas();
-    listarCurtidas()
+    listarMusicasCurtidas();
+    listarMusicasMaisCurtidas();
+    criarGraficos()
 })
+
+function criarGraficos(){
+
+    fetch(`/musica/listarQtdPorSerie/${sessionStorage.idUsuario}`,
+    {cache: "no-store"})
+    .then((listaQtdPorSerie)=>{
+        listaQtdPorSerie.json().then((listaQtdPorSerie)=>{
+            
+            var qtdLikes = []
+
+            for(i = 0; i<listaQtdPorSerie.length; i++){
+                qtdLikes.push(listaQtdPorSerie[i])
+            }
+
+            const ctx = document.getElementById('graficoPorSerie');
+
+                    new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Quantidade de Curtidas'],
+                        datasets: [{
+                        label: 'Dark souls',
+                        data: [qtdLikes[2].qtdCurtidas],
+                        borderWidth: 1
+                        }, {
+                        label: 'Dark souls 2',
+                        data: [qtdLikes[1].qtdCurtidas],
+                        borderWidth: 1
+                        }, {
+                        label: 'Dark souls 3',
+                        data:  [qtdLikes[0].qtdCurtidas],
+                        borderWidth: 1
+                        }], 
+                    },
+                    options: {
+                        scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                        },
+                        aspectRatio: 1 | 1
+                    }
+                    });
+        })
+    })
+
+
+}
 
 var listaDeMusica = []
 
+function listarMusicas(){
+            fetch(`/musica/curtidas/${sessionStorage.idUsuario}`,
+            {cache: "no-store"})
+             .then((listaDeMusicas)=>{
+                listaDeMusicas.json().then((listaDeMusicas)=>{
 
-    function listarMusicas(){
-    
+                    for(i =0; i<listaDeMusicas.length; i++){
 
-                fetch("/musica/luckyFind",
-                {cache: "no-store"})
-                .then((luckyOne)=>{
-                    if(luckyOne.ok){
-                        luckyOne.json().then((luckyOne)=>{
-                            fetch(`/musica/curtiu/${sessionStorage.idUsuario}/${luckyOne[0].idMusica}`, 
-                            {cache: "no-store"}).then((curtiu)=>{
-                                if (curtiu.status == 204){
-                                    var curtiuInterroga = 0
-                                }else{
-                                    var curtiuInterroga = 1
-                                }
+                        listaDarksouls.innerHTML += `
+                        <div class="musicCard" style=" background-image: url(../assets/imgs/${listaDeMusicas[i].vidBanner});">
+                                                      
+                            <div class="fade"></div>
 
-                                listaDeMusica.push({idMusica: luckyOne[0].idMusica,
-                                                      nome: luckyOne[0].nome,
-                                                      ytId: luckyOne[0].ytVidId,
-                                                      banner: luckyOne[0].vidBanner,
-                                                      compositor: luckyOne[0].criadorVid,
-                                                      serie: luckyOne[0].serie})
+                            <button id = "${listaDeMusicas[i].idMusica}" onclick="tocar(this.id)" ><img src="../assets/imgs/playButtonIcon.svg" alt=""></button>
 
-
-
-                                luckyyOne.innerHTML += `
-                                <div id="luckyFind" style="background-image: url(../assets/imgs/${luckyOne[0].vidBanner})">
-
-                                    <div class="fade"></div>
-
-                                
-
-                                    <div class="LFTittle">
-                                        <span>Lucky Find!</span>
-                                        <span id="LFTitulo">${luckyOne[0].nome}</span>
-                                    </div>
-
-
-                                    <div class="opcoes">
-
-                                        <button idmusica = "${luckyOne[0].idMusica}" onclick = "tocar(this.getAttribute('idmusica'))">
-                                            Tocar
-                                        </button>
-                                    </div>
-                                </div>
-                                `
-
-                            })
-                        })
+                            <div class="musicCardTittleSubTittle">
+                            <a href=""><span id="musicCardTittle">${listaDeMusicas[i].nome}</span></a>
+                            <div>
+                            <a href=""><span id="musicCardsubtittle">${listaDeMusicas[i].criadorVid}</span></a>
+                            <span class="gameN">Dark souls <span id="gameN">${listaDeMusicas[i].serie}</span></span>
+                            </div>
+                            </div>
+                        </div>
+                        `
                     }
                 })
+             })
 
-
-        fetch("/musica/listar/1", 
-        {cache: "no-store"})
-         .then((listaDs1)=>{
-            if(listaDs1.ok){
+             fetch(`/musica/listar/1`,
+            {cache: "no-store"})
+             .then((listaDs1)=>{
                 listaDs1.json().then((listaDs1)=>{
-                    for(i = 0; i<listaDs1.length; i++){
+                    for(i =0; i<listaDs1.length; i++){
+
                         listaDeMusica.push({idMusica: listaDs1[i].idMusica,
                                                       nome: listaDs1[i].nome,
                                                       ytId: listaDs1[i].ytVidId,
                                                       banner: listaDs1[i].vidBanner,
                                                       compositor: listaDs1[i].criadorVid,
                                                       serie: listaDs1[i].serie})
-                    }
-
-                    for(i =0; i<5; i++){
 
 
-                        listaDarksouls1.innerHTML += `
-                        <div class="musicCard" style=" background-image: url(../assets/imgs/${listaDs1[i].vidBanner});">
-
-                            
-                                <div class="fade"></div>
-
-                                <button id = "${listaDs1[i].idMusica}" onclick="tocar(this.id)" ><img src="../assets/imgs/playButtonIcon.svg" alt=""></button>
-                            
-                            <div class="musicCardTittleSubTittle">
-                                <a href=""><span id="musicCardTittle">${listaDs1[i].nome}</span></a>
-                                <div>
-                                <a href=""><span id="musicCardsubtittle">${listaDs1[i].criadorVid}</span></a>
-                                <span class="gameN">Dark souls <span id="gameN">${listaDs1[i].serie}</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        `
                     }
                 })
-            }
-         })
+             })
 
-         fetch("/musica/listar/2", 
-        {cache: "no-store"})
-         .then((listaDs2)=>{
-            if(listaDs2.ok){
+             fetch(`/musica/listar/2`,
+            {cache: "no-store"})
+             .then((listaDs2)=>{
                 listaDs2.json().then((listaDs2)=>{
+                    for(i =0; i<listaDs2.length; i++){
 
-                    for(i = 0; i<listaDs2.length; i++){
                         listaDeMusica.push({idMusica: listaDs2[i].idMusica,
                                                       nome: listaDs2[i].nome,
                                                       ytId: listaDs2[i].ytVidId,
                                                       banner: listaDs2[i].vidBanner,
                                                       compositor: listaDs2[i].criadorVid,
                                                       serie: listaDs2[i].serie})
-                    }
-                    for(i =0; i<5; i++){
 
 
-                        listaDarksouls2.innerHTML += `
-                        <div class="musicCard" style=" background-image: url(../assets/imgs/${listaDs2[i].vidBanner});">
- 
-                            
-                                <div class="fade"></div>
-
-                                <button id = "${listaDs2[i].idMusica}" onclick="tocar(this.id)"><img src="../assets/imgs/playButtonIcon.svg" alt=""></button>
-                            
-                            <div class="musicCardTittleSubTittle">
-                                <a href=""><span id="musicCardTittle">${listaDs2[i].nome}</span></a>
-                                <div>
-                                <a href=""><span id="musicCardsubtittle">${listaDs2[i].criadorVid}</span></a>
-                                <span class="gameN">Dark souls <span id="gameN">${listaDs2[i].serie}</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        `
                     }
                 })
-            }
-         })
+             })
 
-         fetch("/musica/listar/3", 
-        {cache: "no-store"})
-         .then((listaDs3)=>{
-            if(listaDs3.ok){
+             fetch(`/musica/listar/3`,
+            {cache: "no-store"})
+             .then((listaDs3)=>{
                 listaDs3.json().then((listaDs3)=>{
-                    for(i = 0; i<listaDs3.length; i++){
+                    for(i =0; i<listaDs3.length; i++){
+
                         listaDeMusica.push({idMusica: listaDs3[i].idMusica,
                                                       nome: listaDs3[i].nome,
                                                       ytId: listaDs3[i].ytVidId,
                                                       banner: listaDs3[i].vidBanner,
                                                       compositor: listaDs3[i].criadorVid,
                                                       serie: listaDs3[i].serie})
-                    }
 
-                    for(i =0; i<5; i++){
-
-                        listaDarksouls3.innerHTML += `
-                        <div class="musicCard" style=" background-image: url(../assets/imgs/${listaDs3[i].vidBanner});">
-                            
-                            
-                                <div class="fade"></div>
-
-                                <button id = "${listaDs3[i].idMusica}" onclick="tocar(this.id)"><img src="../assets/imgs/playButtonIcon.svg" alt=""></button>
-                            
-                            <div class="musicCardTittleSubTittle">
-                                <a href=""><span id="musicCardTittle">${listaDs3[i].nome}</span></a>
-                                <div>
-                                <a href=""><span id="musicCardsubtittle">${listaDs3[i].criadorVid}</span></a>
-                                <span class="gameN">Dark souls <span id="gameN">${listaDs3[i].serie}</span></span>
-                                </div>
-                            </div>
-                        </div>
-                        `
                     }
                 })
-            }
-         })
+             })
+        }
 
-
-    }
-
-    function tocar(id){
+function tocar(id){
 
             var musicaSelecionada = listaDeMusica.find(objeto => objeto.idMusica === parseInt(id));
 
@@ -346,7 +300,7 @@ var listaDeMusica = []
      
     }
 
-    function curtir(idMusica){
+function curtir(idMusica){
         fetch(`/musica/curtiu/${sessionStorage.idUsuario}/${idMusica}`, 
         {cache: "no-store"})
         .then((resposta)=>{
@@ -364,7 +318,7 @@ var listaDeMusica = []
                             })
                         }).then((curtido)=>{
                             playerBotaoCurtida.innerHTML  = '<img src="../assets/imgs/curtidaPreenchida.svg" alt="">'
-                            listarCurtidas()
+                            listarMusicasCurtidas()
                         })
                     }else{
                         fetch("/musica/descurtir", {
@@ -378,14 +332,14 @@ var listaDeMusica = []
                             })
                         }).then((descurtido)=>{
                             playerBotaoCurtida.innerHTML  = '<img src="../assets/imgs/curtidaIcon.svg" alt="">'
-                            listarCurtidas()
+                            listarMusicasCurtidas()
                         })
                     }
             }
         })
     }
     
-    function listarCurtidas(){
+function listarMusicasCurtidas(){
         fetch(`/musica/curtidas/${sessionStorage.idUsuario}`, 
             {cache: "no-store"}).then((listaCurtidas)=>{
                 if(listaCurtidas.ok){
@@ -409,17 +363,38 @@ var listaDeMusica = []
             })
     }
 
-    function setarSerie1(){
-        sessionStorage.serie = 1
-    }
+function listarMusicasMaisCurtidas(){
+    fetch(`/musica/maisCurtidas`, 
+            {cache: "no-store"}).then((listaMusicasMaisCurtidas)=>{
+                listaMusicasMaisCurtidas.json().then((listaMusicasMaisCurtidas)=>{
+                    for(i = 0; i<listaMusicasMaisCurtidas.length; i++){
+                        console.log(listaDeMusica[i])
+                        listaMaisCurtidas.innerHTML += `
+                        <div class="maisCurtidaItem">
+                            <div idmusica = "${listaMusicasMaisCurtidas[i].idMusica}" onclick="tocar(this.getAttribute('idmusica'))" class="maisCurtidaItemImg" style="background-image: url(../assets/imgs/${listaMusicasMaisCurtidas[i].vidBanner});"></div>
 
-    function setarSerie2(){
-        sessionStorage.serie = 2
-    }
+                            <div class="maisCurtidaInfos">
+                                <div class="maisCurtidaTextos">
+                                    <h3>${listaMusicasMaisCurtidas[i].nome}</h3>
+                                    <h4>${listaMusicasMaisCurtidas[i].criadorVid}</h4>
+                                    <h5>Dark souls ${listaMusicasMaisCurtidas[i].serie}</h5>
+                                </div>
 
-    function setarSerie3(){
-        sessionStorage.serie = 3
-    }
+                                <div class="maisCurtidasQTD">
+                                    <h3>${listaMusicasMaisCurtidas[i].qtdCurtidas}</h3>
+                                    <div class="maisCurtidasQTDImg">
+                                        <img src="../assets/imgs/curtidaPreenchida.svg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    }
+                })
+            })
+}
+
+
 </script>
 
 

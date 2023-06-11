@@ -120,6 +120,45 @@ function curtidas(req, res){
     );
 }
 
+function listarQtdPorSerie(req, res){
+    var idUsuario = req.params.idUsuario
+
+    musicaModel.listarQtdPorSerie(idUsuario)
+    .then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
+function maisCurtidas(req, res){
+
+    musicaModel.maisCurtidas()
+    .then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+
 
 
 module.exports = {
@@ -128,5 +167,7 @@ module.exports = {
     curtiu,
     descurtir,
     curtir,
-    curtidas
+    curtidas,
+    maisCurtidas,
+    listarQtdPorSerie
 }

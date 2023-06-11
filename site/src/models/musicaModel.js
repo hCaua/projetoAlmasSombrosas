@@ -6,6 +6,8 @@ var instrucao = `select * from musica where serie = ${serieJogo} order by rand()
     return database.executar(instrucao);
 }
 
+
+
 function curtiu(idUsuario, idMusica) {
 
     var instrucao = `select * from usuarioCurtida where fkUsuario = ${idUsuario} && fkMusica = ${idMusica};`
@@ -27,10 +29,41 @@ function curtir(idUsuario, idMusica) {
 
     function curtidas(idUsuario){
         var instrucao = `
-        select musica.nome, musica.criadorVid, usuario.idUsuario, musica.vidBanner, musica.idMusica from musica 
-            join usuarioCurtida on musica.idMusica = usuarioCurtida.fkMusica
-                join usuario on usuario.idUsuario = usuarioCurtida.fkUsuario
-                    where idUsuario = ${idUsuario};`
+        select musica.nome, musica.criadorVid, usuario.idUsuario, musica.vidBanner, musica.idMusica, musica.serie from musica 
+        join usuarioCurtida on musica.idMusica = usuarioCurtida.fkMusica
+            join usuario on usuario.idUsuario = usuarioCurtida.fkUsuario
+                where idUsuario = ${idUsuario}
+                order by idUsuarioCurtida desc; `
+
+        return database.executar(instrucao);    
+    }
+
+    function listarQtdPorSerie(idUsuario){
+        var instrucao = `
+        SELECT musica.serie, IFNULL(count(curtidas.qtdCurtidas), 0) AS qtdCurtidas
+        FROM musica
+        LEFT JOIN (
+            SELECT musica.idMusica, COUNT(usuarioCurtida.idUsuarioCurtida) AS qtdCurtidas
+            FROM usuarioCurtida
+            JOIN musica ON usuarioCurtida.fkMusica = musica.idMusica
+            WHERE usuarioCurtida.fkUsuario = ${idUsuario}
+            GROUP BY musica.idMusica
+        ) AS curtidas ON musica.idMusica = curtidas.idMusica
+        GROUP BY musica.serie
+        ORDER BY musica.serie DESC;`
+
+        return database.executar(instrucao);    
+    }
+
+
+    function maisCurtidas(){
+        var instrucao = `
+        select count(usuarioCurtida.idUsuarioCurtida) qtdCurtidas, musica.*
+        from usuarioCurtida JOIN musica 
+            ON usuarioCurtida.fkMusica = musica.idMusica
+            group by musica.idMusica, musica.nome, musica.ytVidId, musica.vidBanner, musica.criadorVid, musica.serie, musica.bossDesc
+            order by count(usuarioCurtida.idUsuarioCurtida) desc limit 5;
+            `
 
         return database.executar(instrucao);    
     }
@@ -49,5 +82,7 @@ module.exports = {
     curtiu,
     curtir,
     descurtir,
-    curtidas
+    curtidas,
+    maisCurtidas,
+    listarQtdPorSerie
 };
