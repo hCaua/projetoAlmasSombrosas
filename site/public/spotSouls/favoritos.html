@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpotSouls - Inicio</title>
+    <title>SpotSouls - Favoritos</title>
     <link rel="stylesheet" href="../css/spotSouls.css">
     <link rel="stylesheet" href="../css/favoritos.css">
+
     <script src="https://www.youtube.com/iframe_api"></script>
 
    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
     <div class="leftSide">
@@ -73,17 +75,47 @@
         <div class="musicFeed">
         
         <div class="analytcs">
-            <div class="graficoPorSerie">
-                <span>Sua quantidade de curtidas por jogo</span>
-                <canvas id="graficoPorSerie"></canvas>
-            </div>
-
-            <div class="listaMaisCurtidasWrapper" ">
-                <span>Musicas mais curtidas</span>
-
-                <div class="listaMaisCurtidas" id="listaMaisCurtidas">
+            <div class="analytcsTop">
+                <div class="graficoPorSerie">
+                    <span>Sua quantidade de curtidas por jogo</span>
+                    <canvas id="graficoPorSerie"></canvas>
                 </div>
 
+                <div class="listaMaisCurtidasWrapper" ">
+                    <span>Musicas mais curtidas</span>
+
+                    <div class="listaMaisCurtidas" id="listaMaisCurtidas">
+                    </div>
+
+                </div>
+            </div>
+            <div class="analytcsBottom">
+                <div class="userTitulo">
+
+                    <div id="darkSouls1Titulo" class="userTituloElement">
+                        <div class="fade" id="fade1"></div>
+                        
+                        <span id="tituloDs1">Dark souls</span>
+
+                        <span id="porcentagem1"></span>
+                    </div>
+
+                    <div id="darkSouls2Titulo" class="userTituloElement">
+                        <div class="fade" id="fade2"></div>
+
+                        <span id="tituloDs2">Dark souls 2</span>
+
+                        <span id="porcentagem2"</span>
+                    </div>
+
+                    <div id="darkSouls3Titulo" class="userTituloElement">
+                        <div class="fade"  id="fade3"></div>
+
+                        <span id="tituloDs3">Dark souls 3</span>
+                        
+                        <span id="porcentagem3"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -91,8 +123,6 @@
             <span>Suas curtidas</span>
             
             <div class="musicListHorizontal" id="listaDarksouls">
-                
-
             </div>
         </div>
 
@@ -125,6 +155,38 @@ function criarGraficos(){
             for(i = 0; i<listaQtdPorSerie.length; i++){
                 qtdLikes.push(listaQtdPorSerie[i])
             }
+
+
+            var totalLikes = qtdLikes[0].qtdCurtidas + qtdLikes[1].qtdCurtidas + qtdLikes[2].qtdCurtidas
+
+            if(qtdLikes[2].qtdCurtidas == 0){
+                var totalPorcentagem1 = 0
+            }else{
+                var totalPorcentagem1 = parseInt(qtdLikes[2].qtdCurtidas / totalLikes * 100)
+            }
+
+            if(qtdLikes[1].qtdCurtidas == 0){
+                var totalPorcentagem2 = 0
+            }else{
+                var totalPorcentagem2 = parseInt(qtdLikes[1].qtdCurtidas / totalLikes * 100)
+            }
+
+            if(qtdLikes[0].qtdCurtidas == 0){
+                var totalPorcentagem3 = 0
+            }else{
+                var totalPorcentagem3 = parseInt(qtdLikes[0].qtdCurtidas / totalLikes * 100)
+            }
+
+            
+            porcentagem1.innerHTML = `${totalPorcentagem1}% das suas curtidas`
+
+            porcentagem2.innerHTML = `${totalPorcentagem2}% das suas curtidas`
+
+            porcentagem3.innerHTML = `${totalPorcentagem3}% das suas curtidas`
+            
+
+
+
 
             const ctx = document.getElementById('graficoPorSerie');
 
@@ -368,7 +430,6 @@ function listarMusicasMaisCurtidas(){
             {cache: "no-store"}).then((listaMusicasMaisCurtidas)=>{
                 listaMusicasMaisCurtidas.json().then((listaMusicasMaisCurtidas)=>{
                     for(i = 0; i<listaMusicasMaisCurtidas.length; i++){
-                        console.log(listaDeMusica[i])
                         listaMaisCurtidas.innerHTML += `
                         <div class="maisCurtidaItem">
                             <div idmusica = "${listaMusicasMaisCurtidas[i].idMusica}" onclick="tocar(this.getAttribute('idmusica'))" class="maisCurtidaItemImg" style="background-image: url(../assets/imgs/${listaMusicasMaisCurtidas[i].vidBanner});"></div>

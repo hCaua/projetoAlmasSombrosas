@@ -1,4 +1,11 @@
 .analytcs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+}
+
+.analytcsTop{
     display: flex;
     width: 100%;
     height: 50vh;
@@ -8,7 +15,93 @@
 .graficoPorSerie, .listaMaisCurtidasWrapper{
     min-width: 48%;
     max-width: 48%;
+}
 
+
+.userTitulo{
+  width: 100%;
+  background: rgba(0, 0, 0, 0.51);
+  height: 10rem;
+  border-radius: 15px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.85);
+  position: relative;
+  display: flex;
+}
+
+#darkSouls1Titulo{
+  background-image: url(../assets/imgs/kalameetBanner.jpg);
+  height: 100%;
+  width: 33%;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background-size: cover;
+}
+
+
+
+#darkSouls2Titulo{
+  background-image: url(../assets/imgs/veldstadtBanner.jpg);
+  height: 100%;
+  width: 34%;
+
+  background-size: cover;
+}
+
+#darkSouls3Titulo{
+  background-image: url(../assets/imgs/soulOfCinderBanner.jpg);
+  height: 100%;
+  width: 33%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-size: cover;
+}
+
+.userTituloElement{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.7rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.userTituloElement .fade{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.431);
+  z-index: 0;
+}
+
+.userTituloElement span{
+  z-index: 1;
+}
+
+#porcentagem1, #porcentagem2, #porcentagem3{
+  font-family: 'Noticia text';
+  z-index: -1;
+  transform: translateY(5rem);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+#tituloDs1, #tituloDs2, #tituloDs3{
+  pointer-events: none;
+}
+
+#fade1:hover ~ #porcentagem1, #fade2:hover ~ #porcentagem2, #fade3:hover ~ #porcentagem3{
+  z-index: 1;
+  transform:  translateY(0);
+  
+}
+
+#fade1:hover ~ #tituloDs1, #fade2:hover ~ #tituloDs2, #fade3:hover ~ #tituloDs3{
+  transform: translateY(-1rem);
+  transition: transform 0.5s ease;
 }
 
 
@@ -22,7 +115,7 @@
     padding: 1.5rem 0 3rem 0;
     border-radius: 15px;
     gap: 1rem;
-    background-color: #151515;
+    background: rgba(0, 0, 0, 0.51);
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.85);
 
 }
