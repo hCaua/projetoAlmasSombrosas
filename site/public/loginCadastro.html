@@ -39,10 +39,6 @@
                         <input id="i_senha" type="password">
                     </div>
 
-                    <div class="formInput">
-                        <span>Confirmar senha</span>
-                        <input id="i_confirmarSenha" type="password">
-                    </div>
 
                     <div class="formInput">
                         <span>Email</span>
@@ -68,63 +64,73 @@
     function cadastrar(){
         var usuarioVar = i_usuario.value;
         var emailVar = i_email.value;
+
         var senhaVar = i_senha.value;
-        var confirmarSenha = i_confirmarSenha.value
 
-        if (usuarioVar == "" || emailVar == "" || senhaVar == "" || confirmarSenha == "") {
+
+        if (usuarioVar == "" || emailVar == "" || senhaVar == "") {
             alert("Insira algo, por favor.")
-        }
+        }else{
 
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                usuarioServer: usuarioVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta){
-            console.log("Resposta: ", resposta);
-
-            if(resposta.ok) {
-                alert("cadastro realizado com sucesso.")
-                
-                Array.from(formElements).forEach(formElement => {
-
-                if(loginSwitch.classList.contains("ativo")){
-                    console.log("XD")
-                }else{
-                    if(formElement.getAttribute("estado") == 0){
-
-                        formElement.setAttribute ("estado", 1)
-                        formElement.style.display = "flex"
-                    }else {
-                        formElement.setAttribute ("estado", 0)
-                        formElement.style.display = "none"
-                        
-                    }
-                }
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    usuarioServer: usuarioVar,
+                    emailServer: emailVar
+    
                 })
+            }).then(function (resposta){
+                fetch(`/usuarios/obterId/${usuarioVar}`, {
+                    cache: "no-store"
+                }). then((idUsuario)=>{
+                    idUsuario.json().then((idUsuario)=>{
+                        fetch(`/usuarios/cadastrarSenhaUsuario/${idUsuario[0].idUsuario}/${senhaVar}`, {
+                            cache: "no-store"
+                        }).then((resposta)=>{
+                            if(resposta.ok) {
+                                alert("cadastro realizado com sucesso.")
+                                
+                                Array.from(formElements).forEach(formElement => {
 
-                if(cadastroSwitch.classList.contains("ativo")){
-                cadastroSwitch.classList.remove("ativo")
-                }
-                loginSwitch.classList.add("ativo")
+                                if(loginSwitch.classList.contains("ativo")){
+                                    console.log("XD")
+                                }else{
+                                    if(formElement.getAttribute("estado") == 0){
+
+                                        formElement.setAttribute ("estado", 1)
+                                        formElement.style.display = "flex"
+                                    }else {
+                                        formElement.setAttribute ("estado", 0)
+                                        formElement.style.display = "none"
+                                        
+                                    }
+                                }
+                                })
+
+                                if(cadastroSwitch.classList.contains("ativo")){
+                                cadastroSwitch.classList.remove("ativo")
+                                }
+                                loginSwitch.classList.add("ativo")
 
 
-                limparFormulario()
+                                limparFormulario()
 
-            } else {
-                throw("Erro ao tentar realizar cadastro.")
-                alert("Erro ao tentar realizar cadastro.")   
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`)
-        })
+                            } else {
+                                throw("Erro ao tentar realizar cadastro.")
+                                alert("Erro ao tentar realizar cadastro.")   
+                            }
+                        }).catch(function (resposta) {
+                            console.log(`#ERRO: ${resposta}`)
+                        })
 
-        return false;
+                        return false;
+                        })
+                    })
+                })
+        }
     }
 
     function login(){
